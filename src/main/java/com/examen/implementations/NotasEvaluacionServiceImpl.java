@@ -24,7 +24,7 @@ public class NotasEvaluacionServiceImpl implements NotasEvaluacionService {
 
 	@Override
 	public List<NotasEvaluacion> buscarTodasLasNotas() {
-		return entityManager.createQuery("SELECT notasEvaluaciones FROM eva_tch_notas_evaluacion notasEvaluaciones").getResultList();
+		return entityManager.createQuery("SELECT notasEvaluaciones FROM NotasEvaluacion notasEvaluaciones").getResultList();
 	}
 	
 	

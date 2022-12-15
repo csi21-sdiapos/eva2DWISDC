@@ -24,7 +24,7 @@ public class EvaluacionServiceImpl implements EvaluacionService {
 
 	@Override
 	public List<Evaluacion> buscarTodasLasEvaluaciones() {
-		return entityManager.createQuery("SELECT evaluaciones FROM eva_cat_evaluacion evaluaciones").getResultList();
+		return entityManager.createQuery("SELECT evaluaciones FROM Evaluacion evaluaciones").getResultList();
 	}
 
 }
