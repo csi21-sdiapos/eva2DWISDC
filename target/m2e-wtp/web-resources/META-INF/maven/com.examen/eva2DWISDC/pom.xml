@@ -1,0 +1,182 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.examen</groupId>
+  <artifactId>eva2DWISDC</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>eva2DWISDC Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  	
+  	<java-version>1.8</java-version>
+  	
+	<org.springframework-version>5.3.23</org.springframework-version>
+	
+	<hibernate.version>5.6.12.Final</hibernate.version>
+	
+	<postgresql.connector.version>42.5.0</postgresql.connector.version>
+  </properties>
+  
+  <dependencies>
+  
+	<!-- Log: permite escribir mensajes de registro,
+	cuyo propósito es dejar constancia de una determinada transacción 
+	en tiempo de ejecución, filtrando según importancia -->
+    <dependency>
+    	<groupId>org.apache.logging.log4j</groupId>
+    	<artifactId>log4j-api</artifactId>
+    	<version>2.19.0</version>
+    </dependency>
+    
+    <dependency>
+    	<groupId>org.apache.logging.log4j</groupId>
+    	<artifactId>log4j-core</artifactId>
+    	<version>2.19.0</version>
+    </dependency>
+	
+	<!-- FRAMEWORK SPRING -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>5.2.22.RELEASE</version>
+	</dependency>	 
+    
+    <!-- Bloque de construcción básico para Spring que, junto con Spring Beans, 
+    proporciona funciones de inyección de dependencias e IoC.-->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-core</artifactId>
+  		<version>5.2.22.RELEASE</version>
+  	</dependency>
+  	
+  	<!-- Spring Beans proporciona el marco de configuración y la 
+  	funcionalidad básica para instanciar, configurar y ensamblar objetos java.-->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-beans</artifactId>
+  		<version>5.2.20.RELEASE</version>
+  	</dependency>
+  	
+  	<!-- Clases de soporte para integrar bibliotecas comunes de terceros 
+  	en un contexto de aplicación de Spring-->
+  	<dependency>
+  	  	<groupId>org.springframework</groupId>
+  		<artifactId>spring-context-support</artifactId>
+  		<version>5.2.22.RELEASE</version>  	
+  	</dependency>
+  	
+  	<!-- proporciona características de integración como la funcionalidad de 
+  	carga de archivos de varias partes y la inicialización del contenedor IoC 
+  	utilizando escuchas de servlets y un contexto de aplicación orientado a la 
+  	web. También contiene un cliente HTTP y las partes relacionadas con la web 
+  	del soporte remoto de Spring. -->
+  	<dependency>
+  	  	<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>5.2.20.RELEASE</version>  	
+  	</dependency>
+  	
+  	<!-- proporciona capas de integración para las API más populares de mapeo 
+  	relacional de objetos, incluidas JPA, JDO e Hibernate-->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>5.2.22.RELEASE</version>
+	</dependency>
+    
+    <!-- HIBERNATE -->
+	<!-- Incluye core -->
+    <dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>5.6.14.Final</version>
+	</dependency>
+	
+	<!-- DRIVERS -->
+	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.5.0</version>
+	</dependency>
+	
+	<!-- SERVLET -->  		 
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.2</version>
+      <scope>provided</scope>
+    </dependency>
+   
+  </dependencies>
+  
+  <!-- How to solve java.lang.NoClassDefFoundError: javax/servlet/jsp/tagext/TagLibraryValidator -->
+  <!-- https://www.youtube.com/watch?v=BYesEMMXWXc -->
+  
+  <build>
+  	<pluginManagement> <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+  		<plugins>
+	  		<plugin>
+		    	<artifactId>maven-clean-plugin</artifactId>
+		        <version>3.2.0</version>
+		 	</plugin>
+		      
+	        <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <version>3.3.2</version>
+		        <configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+		    </plugin>
+	        
+	        <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-compiler-plugin</artifactId>
+		        <version>3.10.1</version>
+		        <configuration>
+		        	<source>1.8</source>
+		          	<target>1.8</target>
+		          
+		          	<annotationProcessorPaths>
+	                	<path>
+	                    	<groupId>org.mapstruct</groupId>
+						    <artifactId>mapstruct-processor</artifactId>
+						    <version>1.5.3.Final</version>
+	                	</path>
+	            	</annotationProcessorPaths>
+		        </configuration>
+			</plugin>
+		      
+		    <plugin>
+		    	<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <version>3.0.0-M7</version>
+		    </plugin>
+		      
+		    <plugin>
+	        	<artifactId>maven-install-plugin</artifactId>
+	          	<version>3.0.1</version>
+	        </plugin>
+	        
+	        <plugin>
+	          <artifactId>maven-deploy-plugin</artifactId>
+	          <version>3.0.0</version>
+	        </plugin>
+	    </plugins>
+  	</pluginManagement>
+  
+    <finalName>eva2DWISDC</finalName>
+  </build>
+</project>
